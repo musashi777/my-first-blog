@@ -1,27 +1,14 @@
-<html>
-    <head>
-        <title>Django esaius blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">esaius Blog</a></h1>
-        </div>
+{% extends 'blog/base.html' %}
 
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">photo2 post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+           <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
 
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">photo3 post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">photo4 post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
